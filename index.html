@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cajero Automático</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 flex justify-center items-center h-screen">
+
+  <div class="bg-slate-800 p-10 rounded-2xl shadow-2xl w-96">
+
+    <h1 class="text-3xl text-white font-bold text-center mb-8">
+      Cajero Automático
+    </h1>
+
+    <input
+      type="text"
+      placeholder="Número de cuenta"
+      class="w-full mb-4 p-3 rounded-lg bg-slate-700 text-white"
+    >
+
+    <input
+      type="password"
+      placeholder="PIN"
+      class="w-full mb-6 p-3 rounded-lg bg-slate-700 text-white"
+    >
+
+    <button
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold"
+    >
+      Ingresar
+    </button>
+
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

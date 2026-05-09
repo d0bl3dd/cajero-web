@@ -1,0 +1,2 @@
+const SUPABASE_URL = "TU_URL";
+const SUPABASE_KEY = "TU_KEY";
