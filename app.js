@@ -1,4 +1,4 @@
-console.log("APP NUEVA");
+console.log("VERSION NUEVA REAL");
 
 const SUPABASE_URL =
 "https://bwvyxmyzojuiuwmrjfsu.supabase.co";
@@ -27,15 +27,7 @@ btnLogin.addEventListener("click", async () => {
 
     mensaje.innerText = "";
 
-    if(!cuenta || !pin){
-
-        mensaje.innerText =
-        "Complete todos los campos";
-
-        return;
-    }
-
-    try{
+    try {
 
         const { data, error } = await client
             .from("usuarios")
@@ -56,11 +48,6 @@ btnLogin.addEventListener("click", async () => {
 
         if(data.length > 0){
 
-            localStorage.setItem(
-                "usuario",
-                JSON.stringify(data[0])
-            );
-
             window.location.href =
             "dashboard.html";
 
@@ -70,7 +57,7 @@ btnLogin.addEventListener("click", async () => {
             "Cuenta o PIN incorrecto";
         }
 
-    }catch(err){
+    } catch(err){
 
         console.log(err);
 
