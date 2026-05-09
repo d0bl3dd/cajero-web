@@ -4,7 +4,7 @@ const SUPABASE_URL =
 "https://bwvyxmyzojuiuwmrjfsu.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_TkQbvH4IyYfXsVVAgFiFcQ_YtEHbQA4";
+"TU_SUPABASE_KEY";
 
 const client = window.supabase.createClient(
     SUPABASE_URL,
@@ -47,6 +47,15 @@ btnLogin.addEventListener("click", async () => {
         }
 
         if(data.length > 0){
+
+            // GUARDAR SESIÓN
+
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify(data[0])
+            );
+
+            // REDIRECCIÓN
 
             window.location.href =
             "dashboard.html";
