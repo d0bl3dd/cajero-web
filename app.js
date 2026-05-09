@@ -1,9 +1,9 @@
-console.log("LOGIN CARGADO");
+console.log("LOGIN JS CARGADO");
 
 const SUPABASE_URL = "https://bwvyxmyzojuiuwmrjfsu.supabase.co";
-const SUPABASE_KEY = "sb_publishable_TkQbvH4IyYfXsVVAgFiFcQ_YtEHbQA4";
+const SUPABASE_KEY = "TU_ANON_KEY_REAL_AQUI";
 
-const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 document.getElementById("btnLogin").addEventListener("click", async () => {
 
@@ -13,24 +13,26 @@ document.getElementById("btnLogin").addEventListener("click", async () => {
 
     mensaje.innerText = "";
 
-    console.log("LOGIN INTENTO:", cuenta, pin);
-
     const { data, error } = await client
         .from("usuarios")
         .select("*")
         .eq("cuenta", cuenta)
-        .eq("pin", pin)
-        .single();
+        .eq("pin", pin);
 
     console.log("DATA:", data);
     console.log("ERROR:", error);
 
-    if (error || !data) {
+    if (error) {
+        mensaje.innerText = "Error de conexión";
+        return;
+    }
+
+    if (!data || data.length === 0) {
         mensaje.innerText = "Cuenta o PIN incorrecto";
         return;
     }
 
-    localStorage.setItem("usuario", JSON.stringify(data));
+    localStorage.setItem("usuario", JSON.stringify(data[0]));
 
     window.location.href = "dashboard.html";
 });
