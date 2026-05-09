@@ -4,7 +4,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3dnl4bXl6b2p1aXV3bXJqZnN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyOTQxNzksImV4cCI6MjA5Mzg3MDE3OX0.T1URlauIxhysbNY8wd86VEiAYN1v11qC4os2AD-ljZk";
 
-const client = supabase.createClient(
+const client = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
@@ -15,25 +15,35 @@ document.getElementById("btnLogin");
 btnLogin.addEventListener("click", async () => {
 
     const cuenta =
-    document.getElementById("cuenta").value;
+    document.getElementById("cuenta").value.trim();
 
     const pin =
-    document.getElementById("pin").value;
+    document.getElementById("pin").value.trim();
 
     const mensaje =
     document.getElementById("mensaje");
 
     mensaje.innerText = "";
 
-    // CONSULTA
+    // VALIDACIÓN
+
+    if(!cuenta || !pin){
+
+        mensaje.innerText =
+        "Complete todos los campos";
+
+        return;
+    }
+
+    // CONSULTA A SUPABASE
 
     const { data, error } = await client
         .from("usuarios")
         .select("*")
         .eq("cuenta", cuenta)
-        .eq("alfiler", pin);
+        .eq("pin", pin);
 
-    // ERROR
+    // ERROR DE CONEXIÓN
 
     if(error){
 
@@ -45,7 +55,7 @@ btnLogin.addEventListener("click", async () => {
         return;
     }
 
-    // LOGIN CORRECTO
+    // LOGIN EXITOSO
 
     if(data.length > 0){
 
