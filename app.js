@@ -1,4 +1,4 @@
-console.log("LOGIN OK");
+console.log("SUPABASE LOGIN");
 
 const SUPABASE_URL =
 "https://vqesmgngorugxznkamla.supabase.co";
@@ -6,8 +6,9 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxZXNtZ25nb3J1Z3h6bmthbWxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNTk1MTcsImV4cCI6MjA5MzkzNTUxN30.KoW2iKYr023ExOKbetHqOeEMi88asX09X7kSOBUlJWc";
 
-const client =
-supabase.createClient(
+const { createClient } = supabase;
+
+const client = createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
@@ -31,48 +32,56 @@ document
     const mensaje =
     document.getElementById("mensaje");
 
-    mensaje.innerText = "";
+    mensaje.innerText = "Conectando...";
 
-    const { data, error } = await client
+    try {
+
+        const { data, error } =
+        await client
         .from("usuarios")
         .select("*");
 
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
+        console.log(data);
+        console.log(error);
 
-    if (error) {
+        if (error) {
+
+            mensaje.innerText =
+            error.message;
+
+            return;
+        }
+
+        const user = data.find(u =>
+
+            String(u.cuenta) === cuenta
+
+            &&
+
+            String(u.pin) === pin
+        );
+
+        if (!user) {
+
+            mensaje.innerText =
+            "Cuenta o PIN incorrecto";
+
+            return;
+        }
+
+        localStorage.setItem(
+            "usuario",
+            JSON.stringify(user)
+        );
+
+        window.location.href =
+        "dashboard.html";
+
+    } catch(err) {
+
+        console.log(err);
 
         mensaje.innerText =
-        "Error conectando con Supabase";
-
-        return;
+        "Error real: " + err.message;
     }
-
-    const user = data.find(u =>
-
-        String(u.cuenta) === String(cuenta)
-
-        &&
-
-        String(u.pin) === String(pin)
-
-    );
-
-    console.log("USER:", user);
-
-    if (!user) {
-
-        mensaje.innerText =
-        "Cuenta o PIN incorrecto";
-
-        return;
-    }
-
-    localStorage.setItem(
-        "usuario",
-        JSON.stringify(user)
-    );
-
-    window.location.href =
-    "dashboard.html";
 });
