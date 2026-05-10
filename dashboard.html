@@ -17,40 +17,81 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 </head>
 
-<body class="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+<body class="min-h-screen bg-[#020617] text-white overflow-x-hidden">
 
-<div class="fixed inset-0 -z-10">
+<div class="fixed inset-0 -z-10 overflow-hidden">
 
-<div class="absolute top-0 left-0 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
+<div class="absolute top-[-150px] left-[-120px] w-[450px] h-[450px] bg-blue-600/30 rounded-full blur-3xl animate-pulse"></div>
 
-<div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-20"></div>
+<div class="absolute bottom-[-150px] right-[-120px] w-[450px] h-[450px] bg-cyan-500/30 rounded-full blur-3xl animate-pulse"></div>
+
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:22px_22px]"></div>
 
 </div>
 
-<div class="max-w-5xl mx-auto p-5 md:p-10">
+<div class="max-w-7xl mx-auto p-4 md:p-8">
 
-<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+<div class="flex flex-col lg:flex-row gap-6">
 
-<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+<div class="w-full lg:w-[280px] bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[32px] p-6 shadow-2xl">
+
+<div class="flex items-center gap-4">
+
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-3xl shadow-2xl">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
 
 <div>
 
-<h1 class="text-4xl font-black bg-gradient-to-r from-white via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-
-<i class="fa-solid fa-building-columns mr-2"></i>
+<h1 class="text-3xl font-black">
 Kajero
-
 </h1>
 
-<p class="text-slate-400 mt-2">
-Panel bancario digital
+<p class="text-slate-400 text-sm">
+Digital Banking
 </p>
 
 </div>
 
+</div>
+
+<div class="mt-10 flex flex-col gap-4">
+
+<button class="bg-blue-500/15 border border-blue-500/20 text-blue-300 rounded-2xl py-4 font-semibold hover:bg-blue-500/20 transition">
+
+<i class="fa-solid fa-house mr-2"></i>
+Inicio
+
+</button>
+
+<button class="bg-white/5 border border-white/10 rounded-2xl py-4 font-semibold hover:bg-white/10 transition">
+
+<i class="fa-solid fa-money-bill-transfer mr-2"></i>
+Transferencias
+
+</button>
+
+<button class="bg-white/5 border border-white/10 rounded-2xl py-4 font-semibold hover:bg-white/10 transition">
+
+<i class="fa-solid fa-clock-rotate-left mr-2"></i>
+Movimientos
+
+</button>
+
+<button class="bg-white/5 border border-white/10 rounded-2xl py-4 font-semibold hover:bg-white/10 transition">
+
+<i class="fa-solid fa-gear mr-2"></i>
+Configuración
+
+</button>
+
+</div>
+
 <button
-onclick="logout()"
-class="bg-red-500 hover:bg-red-600 transition px-5 py-3 rounded-2xl font-bold shadow-lg"
+id="logout"
+class="mt-10 w-full bg-gradient-to-r from-red-500 to-rose-600 hover:scale-[1.02] transition rounded-2xl py-4 font-bold shadow-xl"
 >
 
 <i class="fa-solid fa-right-from-bracket mr-2"></i>
@@ -60,64 +101,120 @@ Cerrar sesión
 
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+<div class="flex-1">
 
-<div class="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl p-7 shadow-2xl">
+<div class="bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[32px] p-6 md:p-8 shadow-2xl">
 
-<p class="text-white/80 text-sm">
-Usuario conectado
+<div class="flex flex-col xl:flex-row gap-6 xl:items-center xl:justify-between">
+
+<div>
+
+<p class="text-slate-400 text-sm uppercase tracking-[4px]">
+Bienvenido
 </p>
 
 <h2
 id="nombre"
-class="text-3xl font-black mt-2 break-words"
+class="text-4xl md:text-5xl font-black mt-3 bg-gradient-to-r from-white via-blue-400 to-cyan-400 bg-clip-text text-transparent break-words"
 >
+
 Cargando...
+
 </h2>
 
-<p class="mt-5 text-white/70">
-<i class="fa-solid fa-credit-card mr-2"></i>
-Cuenta:
-<span id="cuenta">
-----
-</span>
+<p class="text-slate-400 mt-4 text-lg">
+Gestiona tus movimientos bancarios digitales
 </p>
 
 </div>
 
-<div class="bg-white/5 border border-white/10 rounded-3xl p-7 backdrop-blur-xl">
+<div class="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-[30px] p-7 min-w-[300px] shadow-2xl">
 
-<p class="text-slate-400 text-sm">
+<div class="flex justify-between items-start">
+
+<div>
+
+<p class="text-white/70 text-sm">
 Saldo disponible
 </p>
 
 <h2
 id="saldo"
-class="text-5xl font-black mt-3 text-green-400 break-words"
+class="text-5xl font-black mt-3 break-words"
 >
+
 $ 0
+
 </h2>
+
+</div>
+
+<div class="text-5xl text-white/80">
+<i class="fa-solid fa-wallet"></i>
+</div>
+
+</div>
+
+<div class="mt-8 flex items-center justify-between">
+
+<div>
+
+<p class="text-white/60 text-xs uppercase">
+Cuenta
+</p>
+
+<p
+id="cuenta"
+class="text-xl font-bold mt-1 tracking-widest"
+>
+
+----
+
+</p>
+
+</div>
+
+<div class="text-right">
+
+<p class="text-white/60 text-xs uppercase">
+Estado
+</p>
+
+<p class="text-green-300 font-bold mt-1">
+Activa
+</p>
 
 </div>
 
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+</div>
 
-<div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+</div>
 
-<h2 class="text-2xl font-bold mb-5">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-10">
 
-<i class="fa-solid fa-circle-plus text-green-400 mr-2"></i>
-Depositar dinero
+<div class="bg-white/5 border border-white/10 rounded-[28px] p-6 hover:translate-y-[-4px] transition">
 
+<div class="w-16 h-16 rounded-2xl bg-green-500/20 text-green-400 flex items-center justify-center text-3xl">
+
+<i class="fa-solid fa-circle-plus"></i>
+
+</div>
+
+<h2 class="text-2xl font-black mt-6">
+Depositar
 </h2>
+
+<p class="text-slate-400 mt-2">
+Agrega dinero a tu cuenta
+</p>
 
 <input
 id="deposito"
 type="number"
 placeholder="Ingrese monto"
-class="w-full bg-slate-900 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 transition"
+class="w-full mt-6 bg-slate-900/80 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-green-500 transition"
 />
 
 <button
@@ -131,20 +228,27 @@ Depositar
 
 </div>
 
-<div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+<div class="bg-white/5 border border-white/10 rounded-[28px] p-6 hover:translate-y-[-4px] transition">
 
-<h2 class="text-2xl font-bold mb-5">
+<div class="w-16 h-16 rounded-2xl bg-red-500/20 text-red-400 flex items-center justify-center text-3xl">
 
-<i class="fa-solid fa-circle-minus text-red-400 mr-2"></i>
-Retirar dinero
+<i class="fa-solid fa-circle-minus"></i>
 
+</div>
+
+<h2 class="text-2xl font-black mt-6">
+Retirar
 </h2>
+
+<p class="text-slate-400 mt-2">
+Retira dinero de tu cuenta
+</p>
 
 <input
 id="retiro"
 type="number"
 placeholder="Ingrese monto"
-class="w-full bg-slate-900 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-red-500 transition"
+class="w-full mt-6 bg-slate-900/80 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-red-500 transition"
 />
 
 <button
@@ -158,36 +262,57 @@ Retirar
 
 </div>
 
+<div class="bg-white/5 border border-white/10 rounded-[28px] p-6 hover:translate-y-[-4px] transition md:col-span-2 xl:col-span-1">
+
+<div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-3xl">
+
+<i class="fa-solid fa-chart-line"></i>
+
+</div>
+
+<h2 class="text-2xl font-black mt-6">
+Actividad
+</h2>
+
+<div class="mt-6 flex flex-col gap-4">
+
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+
+<p class="text-slate-400 text-sm">
+Último ingreso
+</p>
+
+<h3 class="text-2xl font-black mt-1 text-green-400">
++$ 120.000
+</h3>
+
+</div>
+
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+
+<p class="text-slate-400 text-sm">
+Último retiro
+</p>
+
+<h3 class="text-2xl font-black mt-1 text-red-400">
+-$ 50.000
+</h3>
+
 </div>
 
 </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</div>
 
-<script src="app.js"></script>
+</div>
 
-<script>
+</div>
 
-const usuario = JSON.parse(
-localStorage.getItem("usuario")
-);
+</div>
 
-if(usuario){
-
-document.getElementById("nombre").innerText =
-usuario.nombre || "Usuario";
-
-document.getElementById("cuenta").innerText =
-usuario.cuenta || "----";
-
-document.getElementById("saldo").innerText =
-"$ " + Number(usuario.saldo).toLocaleString();
-
-}
-
-</script>
+<script src="dashboard.js"></script>
 
 </body>
-</html> 
+</html>
