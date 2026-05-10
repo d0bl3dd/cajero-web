@@ -213,4 +213,4 @@ async function retirar() {
     .value = "";
 
     alert("Retiro realizado");
-}
+} 
