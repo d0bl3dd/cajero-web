@@ -2,40 +2,192 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NeoBank Dashboard</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>Kajero | Dashboard</title>
 
-    <style>
-        body { font-family: Inter, sans-serif; }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
+
 </head>
 
-<body class="bg-slate-950 text-white">
+<body class="min-h-screen bg-slate-950 text-white overflow-x-hidden">
 
-    <div class="p-10">
+<div class="fixed inset-0 -z-10">
 
-        <h1 id="bienvenida" class="text-4xl font-bold"></h1>
+<div class="absolute top-0 left-0 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
 
-        <p class="mt-4">Cuenta: <span id="numeroCuenta"></span></p>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-20"></div>
 
-        <p class="mt-4 text-2xl font-bold">
-            Saldo: $<span id="saldo"></span>
-        </p>
+</div>
 
-        <button id="cerrarSesion"
-            class="mt-10 bg-red-500 px-6 py-3 rounded-xl">
-            Cerrar sesión
-        </button>
+<div class="max-w-5xl mx-auto p-5 md:p-10">
 
-    </div>
+<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
 
-    <script src="dashboard.js"></script>
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+<div>
+
+<h1 class="text-4xl font-black bg-gradient-to-r from-white via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+
+<i class="fa-solid fa-building-columns mr-2"></i>
+Kajero
+
+</h1>
+
+<p class="text-slate-400 mt-2">
+Panel bancario digital
+</p>
+
+</div>
+
+<button
+onclick="logout()"
+class="bg-red-500 hover:bg-red-600 transition px-5 py-3 rounded-2xl font-bold shadow-lg"
+>
+
+<i class="fa-solid fa-right-from-bracket mr-2"></i>
+Cerrar sesión
+
+</button>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+
+<div class="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl p-7 shadow-2xl">
+
+<p class="text-white/80 text-sm">
+Usuario conectado
+</p>
+
+<h2
+id="nombre"
+class="text-3xl font-black mt-2 break-words"
+>
+Cargando...
+</h2>
+
+<p class="mt-5 text-white/70">
+<i class="fa-solid fa-credit-card mr-2"></i>
+Cuenta:
+<span id="cuenta">
+----
+</span>
+</p>
+
+</div>
+
+<div class="bg-white/5 border border-white/10 rounded-3xl p-7 backdrop-blur-xl">
+
+<p class="text-slate-400 text-sm">
+Saldo disponible
+</p>
+
+<h2
+id="saldo"
+class="text-5xl font-black mt-3 text-green-400 break-words"
+>
+$ 0
+</h2>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+
+<div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+
+<h2 class="text-2xl font-bold mb-5">
+
+<i class="fa-solid fa-circle-plus text-green-400 mr-2"></i>
+Depositar dinero
+
+</h2>
+
+<input
+id="deposito"
+type="number"
+placeholder="Ingrese monto"
+class="w-full bg-slate-900 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 transition"
+/>
+
+<button
+onclick="depositar()"
+class="w-full mt-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.02] transition rounded-2xl py-4 font-bold shadow-xl"
+>
+
+Depositar
+
+</button>
+
+</div>
+
+<div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+
+<h2 class="text-2xl font-bold mb-5">
+
+<i class="fa-solid fa-circle-minus text-red-400 mr-2"></i>
+Retirar dinero
+
+</h2>
+
+<input
+id="retiro"
+type="number"
+placeholder="Ingrese monto"
+class="w-full bg-slate-900 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-red-500 transition"
+/>
+
+<button
+onclick="retirar()"
+class="w-full mt-5 bg-gradient-to-r from-red-500 to-rose-600 hover:scale-[1.02] transition rounded-2xl py-4 font-bold shadow-xl"
+>
+
+Retirar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="app.js"></script>
+
+<script>
+
+const usuario = JSON.parse(
+localStorage.getItem("usuario")
+);
+
+if(usuario){
+
+document.getElementById("nombre").innerText =
+usuario.nombre || "Usuario";
+
+document.getElementById("cuenta").innerText =
+usuario.cuenta || "----";
+
+document.getElementById("saldo").innerText =
+"$ " + Number(usuario.saldo).toLocaleString();
+
+}
+
+</script>
+
 </body>
-
 </html>

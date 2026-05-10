@@ -1,16 +1,34 @@
-console.log("DASHBOARD OK");
-
-const usuario = JSON.parse(localStorage.getItem("usuario"));
+const usuario = JSON.parse(
+    localStorage.getItem("usuario")
+);
 
 if (!usuario) {
     window.location.href = "index.html";
 }
 
-document.getElementById("bienvenida").innerText = "Hola " + usuario.nombre;
-document.getElementById("numeroCuenta").innerText = usuario.cuenta;
-document.getElementById("saldo").innerText = Number(usuario.saldo).toLocaleString();
+const nombre = document.getElementById("nombre");
+const cuenta = document.getElementById("cuenta");
+const saldo = document.getElementById("saldo");
 
-document.getElementById("cerrarSesion").addEventListener("click", () => {
+if (nombre) {
+    nombre.innerText =
+        usuario.nombre || "Usuario";
+}
+
+if (cuenta) {
+    cuenta.innerText =
+        usuario.cuenta || "----";
+}
+
+if (saldo) {
+    saldo.innerText =
+        "$ " + Number(usuario.saldo)
+        .toLocaleString();
+}
+
+function logout() {
+
     localStorage.removeItem("usuario");
+
     window.location.href = "index.html";
-});
+}

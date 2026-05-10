@@ -2,33 +2,105 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoBank Login</title>
+
+<title>Kajero | Login</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
 
 </head>
 
-<body class="bg-slate-950 flex items-center justify-center min-h-screen">
+<body class="min-h-screen bg-slate-950 flex items-center justify-center overflow-hidden relative px-5">
 
-<div class="bg-slate-900 p-8 rounded-2xl w-full max-w-md">
+<div class="absolute top-0 left-0 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
 
-<h1 class="text-white text-2xl mb-6">Login NeoBank</h1>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-20"></div>
 
-<input id="cuenta" placeholder="Cuenta"
-class="w-full p-3 mb-3 rounded bg-slate-800 text-white">
+<div class="w-full max-w-md relative z-10">
 
-<input id="pin" placeholder="PIN" type="password"
-class="w-full p-3 mb-3 rounded bg-slate-800 text-white">
+<div class="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[35px] p-8 shadow-2xl">
 
-<button id="btnLogin"
-class="w-full bg-blue-600 p-3 rounded text-white font-bold">
+<div class="text-center mb-8">
+
+<h1 class="text-5xl font-black bg-gradient-to-r from-white via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+
+<i class="fa-solid fa-building-columns mr-2"></i>
+Kajero
+
+</h1>
+
+<p class="text-slate-400 mt-3">
+Sistema bancario digital conectado a Supabase
+</p>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="relative">
+
+<i class="fa-solid fa-user absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+<input
+id="cuenta"
+type="text"
+placeholder="Número de cuenta"
+autocomplete="off"
+class="w-full bg-slate-900/80 border border-white/10 rounded-2xl py-4 pl-14 pr-5 text-white outline-none focus:border-blue-500 transition"
+/>
+
+</div>
+
+<div class="relative">
+
+<i class="fa-solid fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+<input
+id="pin"
+type="password"
+placeholder="PIN de seguridad"
+class="w-full bg-slate-900/80 border border-white/10 rounded-2xl py-4 pl-14 pr-5 text-white outline-none focus:border-cyan-500 transition"
+/>
+
+</div>
+
+<button
+id="btnLogin"
+class="w-full mt-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-[1.02] transition-all duration-300 rounded-2xl py-4 text-white font-bold shadow-2xl"
+>
+
+<i class="fa-solid fa-right-to-bracket mr-2"></i>
 Ingresar
+
 </button>
 
-<p id="mensaje" class="text-red-400 mt-3"></p>
+<p
+id="mensaje"
+class="text-red-400 text-center mt-4 font-medium"
+></p>
+
+</div>
+
+<div class="mt-8 flex items-center justify-center gap-3 text-slate-500 text-sm">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>
+Conexión segura con Supabase
+</span>
+
+</div>
+
+</div>
 
 </div>
 
